@@ -20,7 +20,7 @@ spec:
       containers:
         - name: upg-loadme
           # update image id (manual or via jenkins)
-          image: '323721060456.dkr.ecr.us-east-1.amazonaws.com/sample-app:latest'
+          image: 'public.ecr.aws/w9p1v5v1/lester-ca-ecr:latest'
           # limiting cpu & mem usage of a pod
           resources:
             requests:
@@ -35,10 +35,10 @@ spec:
       dnsPolicy: ClusterFirst
       # add tolerations to restrict running on selected nodes
       tolerations:
-      - key: "app"
-        operator: "Equal"
-        value: "sample-app"
-        effect: "NoSchedule"
+        - key: 'app'
+          operator: 'Equal'
+          value: 'lester-ca-ecr'
+          effect: 'NoSchedule'
 ---
 kind: Service
 apiVersion: v1
@@ -50,7 +50,7 @@ spec:
     app: upg-loadme
   type: ClusterIP
   ports:
-  - name: app-port
-    protocol: TCP
-    port: 80
-    targetPort: 8081
+    - name: app-port
+      protocol: TCP
+      port: 80
+      targetPort: 8081
